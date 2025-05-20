@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://brqs83kfyxqb0"]
+
+[ext_resource type="Script" uid="uid://bbpqc1ld22mh3" path="res://source/terrain/chunk_system/terrain_chunk.gd" id="1_syuel"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yr2l0"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_syuel"]
+sky_material = SubResource("ProceduralSkyMaterial_yr2l0")
+
+[sub_resource type="Environment" id="Environment_8a8pi"]
+background_mode = 2
+sky = SubResource("Sky_syuel")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_syuel"]
+
+[node name="Test" type="Node3D"]
+
+[node name="Lighting" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
+environment = SubResource("Environment_8a8pi")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 14, 26)
+
+[node name="TerrainChunk" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_syuel")
+script = ExtResource("1_syuel")
+resolution = 15
+dimension = 24.0
+metadata/_custom_type_script = "uid://bbpqc1ld22mh3"
